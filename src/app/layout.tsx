@@ -1,4 +1,4 @@
-import { JSX, ReactNode } from "react";
+import { ReactNode } from "react";
 
 import "./global.scss";
 
@@ -8,7 +8,7 @@ interface Props {
   children: ReactNode;
 }
 
-export default function RootLayout(props: Props): JSX.Element {
+export default function RootLayout(props: Props) {
   return (
     <html lang="en">
       <body>
