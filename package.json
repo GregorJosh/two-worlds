@@ -2,7 +2,6 @@
   "name": "two-worlds",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://gregorjosh.github.io/two-worlds/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
