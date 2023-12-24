@@ -2,7 +2,6 @@
 const nextConfig = {
   transpilePackages: ["three"],
   output: "export",
-  basePath: "/two-worlds",
 };
 
 module.exports = nextConfig;
