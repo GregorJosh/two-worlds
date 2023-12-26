@@ -1,13 +1,7 @@
 "use client";
 
 import { ForwardedRef, forwardRef, useEffect, useRef } from "react";
-import {
-  Canvas,
-  LightProps,
-  MeshProps,
-  useFrame,
-  useThree,
-} from "@react-three/fiber";
+import { Canvas, LightProps, MeshProps, useFrame } from "@react-three/fiber";
 import { CameraHelper, Mesh } from "three";
 
 import { Container } from "..";
@@ -31,17 +25,18 @@ const Sun = (props: SunProps) => {
   );
 };
 
-const Sphere = forwardRef((props: CustomMeshProps, ref: ForwardedRef<Mesh>) => {
+const SphereFR = (props: CustomMeshProps, ref: ForwardedRef<Mesh>) => {
   return (
     <mesh ref={ref} {...props}>
       <sphereGeometry />
       <meshStandardMaterial color={props.color} />
     </mesh>
   );
-});
+};
+
+const Sphere = forwardRef(SphereFR);
 
 const Scene = () => {
-  const { camera, scene } = useThree((state) => state);
   const blueSphereRef = useRef<Mesh>(null!);
   const redSphereRef = useRef<Mesh>(null!);
 
