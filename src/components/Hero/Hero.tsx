@@ -1,37 +1,103 @@
 "use client";
 
-import { useRef } from "react";
-import { Canvas, MeshProps, useFrame } from "@react-three/fiber";
-import { Mesh } from "three";
+import { ForwardedRef, forwardRef, useEffect, useRef } from "react";
+import {
+  Canvas,
+  LightProps,
+  MeshProps,
+  useFrame,
+  useThree,
+} from "@react-three/fiber";
+import { CameraHelper, Mesh } from "three";
 
-interface BoxMeshProps extends MeshProps {
+import { Container } from "..";
+import styles from "./Hero.module.scss";
+
+interface CustomMeshProps extends MeshProps {
   color: string;
 }
 
-const Box = (props: BoxMeshProps) => {
-  const meshRef = useRef<Mesh>(null);
+type SunProps = MeshProps & LightProps;
+
+const Sun = (props: SunProps) => {
+  return (
+    <>
+      <pointLight position={props?.position} intensity={props?.intensity} />
+      <mesh {...props}>
+        <sphereGeometry />
+        <meshBasicMaterial color="yellow" />
+      </mesh>
+    </>
+  );
+};
+
+const Sphere = forwardRef((props: CustomMeshProps, ref: ForwardedRef<Mesh>) => {
+  return (
+    <mesh ref={ref} {...props}>
+      <sphereGeometry />
+      <meshStandardMaterial color={props.color} />
+    </mesh>
+  );
+});
+
+const Scene = () => {
+  const { camera, scene } = useThree((state) => state);
+  const blueSphereRef = useRef<Mesh>(null!);
+  const redSphereRef = useRef<Mesh>(null!);
+
+  const blueSphereRadius = 90;
+  const redSphereRadius = 60;
+
+  let blueSphereAngle = 0;
+  let redSphereAngle = 80;
+
+  /* useEffect(() => {
+    scene.add(new CameraHelper(camera));
+  }, []); */
 
   useFrame((state, delta) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x += delta;
+    if (blueSphereAngle > 360) {
+      blueSphereAngle = 0;
     }
+
+    blueSphereRef.current.position.x =
+      Math.cos(blueSphereAngle) * blueSphereRadius;
+    blueSphereRef.current.position.z =
+      -150 + Math.sin(blueSphereAngle) * blueSphereRadius;
+
+    blueSphereAngle += delta * 0.2;
+
+    if (redSphereAngle > 360) {
+      redSphereAngle = 0;
+    }
+
+    redSphereRef.current.position.x =
+      Math.cos(redSphereAngle) * redSphereRadius;
+    redSphereRef.current.position.z =
+      -150 + Math.sin(redSphereAngle) * redSphereRadius;
+
+    redSphereAngle += delta * 2;
   });
 
   return (
-    <mesh {...props} ref={meshRef} scale={2}>
-      <meshStandardMaterial color={props.color} />
-      <boxGeometry args={[1, 1, 1]} />
-    </mesh>
+    <>
+      {/* <axesHelper /> */}
+      <ambientLight intensity={0.05} />
+      <Sun position={[0, 0, -150]} scale={25} intensity={20000} />
+      <Sphere ref={blueSphereRef} position-y={20} scale={5} color="blue" />
+      <Sphere ref={redSphereRef} position-y={-10} scale={15} color="red" />
+    </>
   );
 };
 
 export const Hero = () => {
   return (
-    <Canvas>
-      <ambientLight intensity={0.08} />
-      <pointLight position={[0, 3, 0]} intensity={10} />
-      <Box position={[-2, 0, 1]} color="red" />
-      <Box position={[2, 0, 0]} color="blue" />
-    </Canvas>
+    <section className={styles.section}>
+      <Container className={styles.container}>
+        <Canvas className={styles.canvas}>
+          <Scene />
+        </Canvas>
+      </Container>
+    </section>
   );
 };
