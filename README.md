@@ -9,7 +9,7 @@ Libs: React, Three.js
 GitHub Pages:  
 https://gregorjosh.github.io/two-worlds/
     
-Google Cloud:  
+Google Cloud Run (Serverless, container):  
 https://two-worlds-yidcuottgq-ew.a.run.app/  
   
   
