@@ -1,11 +1,10 @@
 import Link from "next/link";
-import { JSX } from "react";
 
 import { Container } from "..";
 
 import styles from "./Header.module.scss";
 
-export const Header = (): JSX.Element => {
+export const Header = () => {
   return (
     <header className={styles.header}>
       <Container>
