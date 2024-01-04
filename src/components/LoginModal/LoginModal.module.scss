@@ -1,0 +1,46 @@
+@use "/src/sass/vars.scss";
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.767);
+  backdrop-filter: blur(2px);
+
+  .container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .window {
+      $width: 80%;
+
+      position: absolute;
+      top: 40%;
+      left: calc(50% - $width / 2);
+      width: $width;
+      min-height: 100px;
+
+      background-color: vars.$secondaryColor;
+      border-radius: 8px;
+    }
+  }
+}
+
+.window {
+  .button {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+
+    background-color: vars.$primaryColor;
+    color: vars.$textColor;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+}
