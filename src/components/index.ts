@@ -4,3 +4,4 @@ export * from "./Menu/Menu";
 export * from "./MenuItem/MenuItem";
 export * from "./Article/Article";
 export * from "./SolarSystem/SolarSystem";
+export * from "./Footer/Footer";
