@@ -1,5 +1,7 @@
+@use "/src/sass/vars.scss";
+
 .header {
-  background-color: rgb(42, 42, 69);
+  background-color: vars.$secondaryColor;
 
   .container {
     display: flex;
