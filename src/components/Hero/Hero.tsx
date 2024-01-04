@@ -59,7 +59,7 @@ const Scene = () => {
     blueSphereRef.current.position.z =
       -150 + Math.sin(blueSphereAngleRef.current) * blueSphereRadius;
 
-    blueSphereAngleRef.current += delta * 0.2;
+    blueSphereAngleRef.current += delta * 0.08;
 
     if (redSphereAngleRef.current > 360) {
       redSphereAngleRef.current = 0;
@@ -70,7 +70,7 @@ const Scene = () => {
     redSphereRef.current.position.z =
       -150 + Math.sin(redSphereAngleRef.current) * redSphereRadius;
 
-    redSphereAngleRef.current += delta * 2;
+    redSphereAngleRef.current += delta * 0.07;
   });
 
   return (
