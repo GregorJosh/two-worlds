@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 import "./global.scss";
+import styles from "./layout.module.scss";
 
 import { Container, Header, Hero } from "@/components";
 
@@ -14,7 +15,7 @@ export default function RootLayout(props: Props) {
       <body>
         <Header />
         <Hero />
-        <Container>{props.children}</Container>
+        <Container className={styles.container}>{props.children}</Container>
       </body>
     </html>
   );
