@@ -1,3 +1,5 @@
+@use "../sass/vars.scss";
+
 * {
   margin: 0;
   padding: 0;
@@ -5,20 +7,19 @@
 }
 
 body {
-  background-color: black;
-  color: white;
-  font-family: sans-serif;
+  background-color: vars.$primaryColor;
+  color: vars.$textColor;
 }
 
 a {
   &:link,
   &:visited {
-    color: white;
+    color: vars.$textColor;
     text-decoration: none;
   }
 
   &:hover {
-    color: gray;
+    color: vars.$textHoverColor;
   }
 }
 
