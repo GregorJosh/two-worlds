@@ -1,0 +1,11 @@
+@use "/src/sass/vars.scss";
+
+.wrapper {
+  background-color: vars.$primaryColor;
+  position: absolute;
+  z-index: -1;
+
+  .container {
+    height: 300px;
+  }
+}
