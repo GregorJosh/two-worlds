@@ -12,7 +12,7 @@ export const LoginForm = () => {
           placeholder="Password"
         />
       </label>
-      <button className={styles.button}>Let's go!</button>
+      <button className={styles.button}>Lets go!</button>
     </form>
   );
 };
