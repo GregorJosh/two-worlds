@@ -1,4 +1,4 @@
-@use "../sass/vars.scss";
+@use "../styles/vars.scss";
 
 * {
   margin: 0;
@@ -9,6 +9,13 @@
 body {
   background-color: vars.$primaryColor;
   color: vars.$textColor;
+  font-family: var(--font-rubik);
+}
+
+button,
+input,
+input::placeholder {
+  font-family: var(--font-rubik);
 }
 
 a {
