@@ -1,0 +1,34 @@
+@use "/src/styles/vars.scss";
+
+.window {
+  $width: 90%;
+
+  position: absolute;
+  top: 40%;
+  left: calc(50% - $width / 2);
+  width: $width;
+
+  background-color: vars.$secondaryColor;
+  border-radius: 8px;
+  padding: 10px 10px 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+
+  .button {
+    background-color: vars.$primaryColor;
+    color: vars.$textColor;
+    padding: 0.5em 0.6em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: vars.$primaryLightColor;
+    }
+  }
+}
