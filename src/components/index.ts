@@ -6,3 +6,5 @@ export * from "./Article/Article";
 export * from "./SolarSystem/SolarSystem";
 export * from "./Footer/Footer";
 export * from "./LoginModal/LoginModal";
+export * from "./LoginForm/LoginForm";
+export * from "./Window/Window";
