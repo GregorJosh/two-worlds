@@ -1,4 +1,5 @@
-import { Container } from "..";
+import { Container, LoginForm, Window } from "..";
+
 import styles from "./LoginModal.module.scss";
 
 interface Props {
@@ -9,11 +10,9 @@ export const LoginModal = (props: Props) => {
   return (
     <div className={styles.backdrop}>
       <Container className={styles.container}>
-        <div className={styles.window}>
-          <button className={styles.button} onClick={props.onClose}>
-            &#9587;
-          </button>
-        </div>
+        <Window title="Log in to Admin Panel" onClose={props.onClose}>
+          <LoginForm />
+        </Window>
       </Container>
     </div>
   );
