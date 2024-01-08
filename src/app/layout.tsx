@@ -1,21 +1,19 @@
 import { ReactNode } from "react";
-import { Rubik } from "next/font/google";
 
 import { Container, Footer, Header, SolarSystem } from "@/components";
+import { rubik } from "@/fonts";
 
-import "./global.scss";
+import "@/styles/global.scss";
 import styles from "./layout.module.scss";
 
 interface Props {
   children: ReactNode;
 }
 
-const font = Rubik({ subsets: ["latin"] });
-
 export default function RootLayout(props: Props) {
   return (
-    <html lang="en" className={font.className}>
-      <body>
+    <html lang="en">
+      <body className={`${rubik.variable}`}>
         <Header />
         <Container className={styles.container}>
           <SolarSystem />
