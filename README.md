@@ -6,5 +6,5 @@ Build tool: Next.js
 Language: Typescript  
 Libs: React, Three.js
 
-Google Cloud Run (Serverless, container):  
+Google Cloud Run:  
 https://two-worlds-yidcuottgq-ew.a.run.app/
