@@ -9,6 +9,8 @@ export const POST = async (req: Request) => {
     const user = await db.user.findOne({ username }).lean();
 
     if (user) {
+      console.log(user);
+      
       return Response.json(user);
     }
 
