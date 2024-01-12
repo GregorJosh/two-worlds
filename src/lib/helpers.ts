@@ -26,7 +26,7 @@ export const errorResponse = (error: unknown, status: number = 400) => {
     result.message = error as string;
   }
 
-  //result.message = result.message.replaceAll(/['"]/g, "");
+  result.message = result.message.replaceAll(/['"]/g, "");
 
   return Response.json(result, { status });
 };
