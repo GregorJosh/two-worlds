@@ -30,4 +30,3 @@ export const errorResponse = (error: unknown, status: number = 400) => {
 
   return Response.json(result, { status });
 };
-
