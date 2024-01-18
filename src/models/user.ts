@@ -22,8 +22,8 @@ userSchema.set("toJSON", {
   versionKey: false,
   transform: (document, result) => {
     delete result._id;
-    delete result.hash;
+    delete result.password;
   },
 });
 
-export default models.User || model("User", userSchema);
+export const User = models.User || model("User", userSchema);
