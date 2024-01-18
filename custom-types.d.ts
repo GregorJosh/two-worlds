@@ -13,6 +13,11 @@ interface User {
   password: string;
 }
 
+interface Article {
+  title: string;
+  content: string;
+}
+
 interface AuthTokens {
   accessToken: string;
   refreshToken: string;
