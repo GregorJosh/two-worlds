@@ -1,27 +1,20 @@
-"use client";
+import Link from "next/link";
 
-import { useState } from "react";
-
-import { Container, LoginModal } from "..";
+import { Container } from "..";
 
 import styles from "./Footer.module.scss";
 
 export const Footer = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
   return (
     <footer className={styles.footer}>
       <Container>
         <p>
           © 2024{" "}
-          <a href="#" onClick={() => setIsModalVisible(true)}>
+          <Link href="/signin" scroll={false}>
             Grzegorz Jóźwiak
-          </a>
+          </Link>
         </p>
       </Container>
-      {isModalVisible && (
-        <LoginModal onClose={() => setIsModalVisible(!isModalVisible)} />
-      )}
     </footer>
   );
 };
