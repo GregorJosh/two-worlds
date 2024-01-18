@@ -23,7 +23,7 @@ export const errorResponse = (error: unknown, status: number = 400) => {
   if (error instanceof ValidationError) {
     result.message = error.message;
   } else {
-    result.message = error as string;
+    result.message = (error as any).message as string;
   }
 
   result.message = result.message.replaceAll(/['"]/g, "");
