@@ -1,7 +1,4 @@
-"use client";
-
 import Link, { LinkProps } from "next/link";
-import { MouseEvent } from "react";
 
 interface Props extends LinkProps {
   children: string;
@@ -10,10 +7,8 @@ interface Props extends LinkProps {
 export const MenuItem = (props: Props) => {
   const { children, ...linkProps } = props;
 
-  const onMouseOver = (event: MouseEvent<HTMLLIElement>) => {};
-
   return (
-    <li onMouseOver={onMouseOver}>
+    <li>
       <Link {...linkProps}>{children}</Link>
     </li>
   );
