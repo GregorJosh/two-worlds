@@ -13,4 +13,9 @@ interface User {
   password: string;
 }
 
+interface AuthTokens {
+  accessToken: string;
+  refreshToken: string;
+}
+
 type RouteHandler = (request: Request, ...args: any) => unknown;
