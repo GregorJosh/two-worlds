@@ -1,6 +1,7 @@
 "use client";
 
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import styles from "./LoginForm.module.scss";
 
@@ -9,7 +10,14 @@ interface FormElements extends HTMLFormControlsCollection {
   password: HTMLInputElement;
 }
 
-export const LoginForm = () => {
+interface Props {
+  onSubmit?: () => void;
+}
+
+export const LoginForm = (props: Props) => {
+  const [error, setError] = useState<string | boolean>(false);
+  const router = useRouter();
+
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -24,13 +32,26 @@ export const LoginForm = () => {
       }),
     });
 
-    const data = await result.json();
+    const data: ResponseBody = await result.json();
 
-    console.log(data);
+    if (data.status === "error") {
+      setError(data.message);
+      setTimeout(() => setError(false), 5000);
+
+      return;
+    }
+
+    router.back();
+    router.refresh();
+
+    if (props.onSubmit) {
+      props.onSubmit();
+    }
   };
 
   return (
     <form className={styles.form} onSubmit={onSubmit}>
+      {error && <p>{error}</p>}
       <label className={styles.field}>
         Username:
         <input
