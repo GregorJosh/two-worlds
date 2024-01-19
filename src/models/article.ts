@@ -8,7 +8,7 @@ const articleSchema = new Schema(
       required: true,
     },
     content: {
-      type: String,
+      type: Array<String>,
       required: true,
     },
   },
