@@ -24,7 +24,7 @@ export default async function HomePage() {
       {isAuth && (
         <Form>
           <FormField label="Title">
-            <input type="text" name="title" value={article.title} />
+            <input type="text" name="title" defaultValue={article.title} />
           </FormField>
           <>
             {article.content.map((paragraph, id) => {
