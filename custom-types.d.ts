@@ -15,12 +15,17 @@ interface User {
 
 interface Article {
   title: string;
-  content: string;
+  content: string[];
 }
 
 interface AuthTokens {
   accessToken: string;
   refreshToken: string;
 }
+
+type FormInputElement =
+  | HTMLInputElement
+  | HTMLTextAreaElement
+  | HTMLOptionElement;
 
 type RouteHandler = (request: Request, ...args: any) => unknown;
