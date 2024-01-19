@@ -29,3 +29,9 @@ type FormInputElement =
   | HTMLOptionElement;
 
 type RouteHandler = (request: Request, ...args: any) => unknown;
+
+type ErrorMessage = string;
+
+type OnSubmitHandler = (
+  event: FormEvent<HTMLFormElement>
+) => Promise<ErrorMessage | void>;
