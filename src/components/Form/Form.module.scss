@@ -1,6 +1,42 @@
+@use "/src/styles/vars.scss";
+
 .form {
   display: flex;
   flex-direction: column;
+  gap: 10px;
   align-items: stretch;
-  gap: 5px;
+
+  .button {
+    background-color: vars.$secondaryColor;
+    color: vars.$textColor;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    align-self: flex-start;
+    font-size: 16px;
+
+    &:hover {
+      background-color: vars.$primaryLightColor;
+      cursor: pointer;
+    }
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: stretch;
+  text-align: left;
+
+  .input {
+    background-color: vars.$secondaryLightColor;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.444);
+    }
+  }
 }
