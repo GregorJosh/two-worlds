@@ -15,6 +15,10 @@ export default async function HomePage() {
     textAlign: "left",
   };
 
+  if (!article) {
+    return <p>No data</p>;
+  }
+
   return (
     <>
       {isAuth && (
