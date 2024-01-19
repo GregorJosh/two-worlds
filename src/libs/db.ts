@@ -2,7 +2,15 @@ import mongoose from "mongoose";
 
 import * as models from "@/models";
 
-mongoose.connect(process.env.DB_HOST!);
-mongoose.Promise = global.Promise;
+let isConnected = false;
 
-export const db = models;
+if (process.env.DB_HOST) {
+  mongoose.connect(process.env.DB_HOST);
+  
+  isConnected = true;
+}
+
+export const db = {
+  isConnected,
+  ...models,
+};
