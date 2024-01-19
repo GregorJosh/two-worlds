@@ -1,13 +1,29 @@
+@use "/src/styles/vars.scss";
+
 .form-field {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
+  align-items: stretch;
+  text-align: left;
   width: 100%;
 
   & textarea {
     min-height: 100px;
+    resize: vertical;
   }
 
-  & * {
-    width: 70%;
+  & input,
+  & textarea {
+    background-color: rgba(vars.$secondaryLightColor, 0.5);
+    backdrop-filter: blur(4px);
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    color: white;
+
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.444);
+    }
   }
 }
