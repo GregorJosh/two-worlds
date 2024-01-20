@@ -20,6 +20,7 @@ interface Props extends FormHTMLAttributes<HTMLFormElement> {
 export const Form = (props: Props) => {
   const [error, setError] = useState<string | boolean>(false);
   const { pending } = useFormStatus();
+  const { children, buttonClassName, ...restProps } = props;
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -36,9 +37,9 @@ export const Form = (props: Props) => {
 
   return (
     <form
+      {...restProps}
       className={`${styles.form} ${props.className}`}
-      onSubmit={onSubmit}
-      action={props.action}
+      onSubmit={props.onSubmit && onSubmit}
     >
       {error && <p>{error}</p>}
       {props.children}
