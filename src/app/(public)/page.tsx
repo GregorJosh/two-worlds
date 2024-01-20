@@ -1,8 +1,9 @@
 import { CSSProperties } from "react";
+import { redirect } from "next/navigation";
 
 import { isAuthenticated } from "@/libs";
 import { Article, Form, FormField } from "@/components";
-import { getArticleByTitle } from "@/actions";
+import { getArticleByTitle, updateArticleByTitle } from "@/actions";
 
 export const metadata = {
   title: "Two Worlds: Home",
@@ -19,10 +20,18 @@ export default async function HomePage() {
     return <p>No data</p>;
   }
 
+  const updateArticle = async (formData: FormData) => {
+    "use server";
+
+    await updateArticleByTitle(article.title, formData);
+
+    redirect("/");
+  };
+
   return (
     <>
       {isAuth && (
-        <Form>
+        <Form action={updateArticle}>
           <FormField label="Title">
             <input type="text" name="title" defaultValue={article.title} />
           </FormField>
