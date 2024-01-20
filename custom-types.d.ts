@@ -1,3 +1,7 @@
+interface PropsWithClassName {
+  className?: string;
+}
+
 interface RouteHandlers {
   [key: string]: RouteHandler;
 }
