@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 import { isAuthenticated } from "@/libs";
 import { Article, Form, FormField } from "@/components";
@@ -25,7 +25,7 @@ export default async function HomePage() {
 
     await updateArticleByTitle(article.title, formData);
 
-    redirect("/");
+    revalidatePath("/");
   };
 
   return (
