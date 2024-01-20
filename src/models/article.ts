@@ -1,6 +1,6 @@
-import { models, model, Schema } from "mongoose";
+import { model, Schema, Model, models } from "mongoose";
 
-const articleSchema = new Schema(
+const articleSchema = new Schema<ArticleDocument, Model<ArticleDocument>>(
   {
     title: {
       type: String,
@@ -8,7 +8,7 @@ const articleSchema = new Schema(
       required: true,
     },
     content: {
-      type: Array<String>,
+      type: [String],
       required: true,
     },
   },
@@ -22,4 +22,5 @@ articleSchema.set("toJSON", {
   versionKey: false,
 });
 
-export const Article = models.Article || model("Article", articleSchema);
+export const Article: Model<ArticleDocument> =
+  models.Article || model("Article", articleSchema);
