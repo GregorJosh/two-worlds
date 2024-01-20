@@ -13,7 +13,7 @@ interface User {
   password: string;
 }
 
-interface Article {
+interface ArticleDocument {
   title: string;
   content: string[];
 }
