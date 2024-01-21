@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { isAuthenticated } from "@/libs";
 import { Article, Form, FormField } from "@/components";
 import { getArticleByTitle, updateArticleByTitle } from "@/actions";
+import ErrorPage from "./error";
 
 export const metadata = {
   title: "Two Worlds: Home",
@@ -11,13 +12,13 @@ export const metadata = {
 
 export default async function HomePage() {
   const isAuth = isAuthenticated();
-  const article = await getArticleByTitle("Two Worlds");
+  const [article, errors] = await getArticleByTitle("Two Worlds");
   const styledP: CSSProperties = {
     textAlign: "left",
   };
 
   if (!article) {
-    return <p>No data</p>;
+    return <ErrorPage errors={errors!} />;
   }
 
   const updateArticle = async (formData: FormData) => {
