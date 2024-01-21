@@ -3,7 +3,7 @@
 import { FormEvent, FormHTMLAttributes, ReactElement, useState } from "react";
 import { useFormStatus } from "react-dom";
 
-import { FormField } from "..";
+import { FormField, Button } from "..";
 
 import styles from "./Form.module.scss";
 
@@ -43,12 +43,13 @@ export const Form = (props: Props) => {
     >
       {error && <p>{error}</p>}
       {props.children}
-      <button
-        className={`${props.buttonClassName} ${styles.button}`}
+      <Button
+        className={props.buttonClassName}
+        type="submit"
         aria-disabled={pending}
       >
         Submit
-      </button>
+      </Button>
     </form>
   );
 };
