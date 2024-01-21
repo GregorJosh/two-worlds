@@ -6,16 +6,24 @@ const queryForArticleByTitle = (title: string) => {
   const result = query(db.Article, { title });
 
   if (!result) {
-    throw `Article with ${title} title does not exist!`;
+    db.errors.push(`Article with ${title} title does not exist!`);
+
+    return null;
   }
 
   return result;
 };
 
-export const getArticleByTitle = (title: string) => {
+export const getArticleByTitle = async (
+  title: string
+): Promise<ActionResult<ArticleDocument>> => {
   const article = queryForArticleByTitle(title);
 
-  return article.lean();
+  if (!article) {
+    return [null, db.errors];
+  }
+
+  return [await article.lean(), null];
 };
 
 export const updateArticleByTitle = async (
@@ -24,9 +32,11 @@ export const updateArticleByTitle = async (
 ) => {
   const article = await queryForArticleByTitle(title);
 
-  if (article) {
-    article.title = formData.get("title") as string;
-    article.content = formData.getAll("paragraph") as string[];
-    await article.save();
+  if (!article) {
+    return [null, db.errors];
   }
+
+  article.title = formData.get("title") as string;
+  article.content = formData.getAll("paragraph") as string[];
+  await article.save();
 };
