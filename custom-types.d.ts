@@ -35,6 +35,9 @@ type FormInputElement =
 type RouteHandler = (request: Request, ...args: any) => unknown;
 
 type ErrorMessage = string;
+type ErrorMessages = string[];
+
+type ActionResult<DocumentType> = [DocumentType | null, ErrorMessages | null];
 
 type OnSubmitHandler = (
   event: FormEvent<HTMLFormElement>
