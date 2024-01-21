@@ -2,6 +2,8 @@ import mongoose, { Document, FilterQuery, Model } from "mongoose";
 
 import * as models from "@/models";
 
+const errors: string[] = [];
+
 let isConnected = false;
 
 if (process.env.DB_HOST) {
@@ -11,6 +13,7 @@ if (process.env.DB_HOST) {
 }
 
 export const db = {
+  errors,
   isConnected,
   ...models,
 };
@@ -25,5 +28,7 @@ export function query<DocumentType>(
     return result;
   }
 
-  throw "Not connected to db!";
+  errors.push("Not connected to db!");
+
+  return null;
 }
