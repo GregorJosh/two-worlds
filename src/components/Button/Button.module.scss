@@ -1,0 +1,16 @@
+@use "/src/styles/vars.scss";
+
+.button {
+  background-color: vars.$secondaryColor;
+  color: vars.$textColor;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  align-self: flex-start;
+  font-size: 16px;
+
+  &:hover {
+    background-color: vars.$primaryLightColor;
+    cursor: pointer;
+  }
+}
