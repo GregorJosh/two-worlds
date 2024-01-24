@@ -18,6 +18,8 @@ interface Props {
   modal: ReactNode;
 }
 
+export const dynamic = "force-dynamic";
+
 export default function RootLayout(props: Props) {
   return (
     <html lang="en">
