@@ -1,15 +1,23 @@
-import { MenuItem } from "..";
+import { Container, MenuItem } from "..";
 
-import styles from "./Menu.module.scss";
+import defaultStyles from "./Menu.module.scss";
 
-export const Menu = () => {
+interface Props extends PropsWithClassName {
+  customStyles?: Styles;
+}
+
+export const Menu = (props: Props) => {
+  const styles = props.customStyles || defaultStyles;
+
   return (
-    <nav>
-      <ul className={styles.ul}>
-        <MenuItem href="/">Home</MenuItem>
-        <MenuItem href="/dev">Dev World</MenuItem>
-        <MenuItem href="/music">Music World</MenuItem>
-      </ul>
+    <nav className={`${styles.nav} ${props.className}`}>
+      <Container className={styles.container}>
+        <ul className={styles.ul}>
+          <MenuItem href="/">Home</MenuItem>
+          <MenuItem href="/dev">Dev World</MenuItem>
+          <MenuItem href="/music">Music World</MenuItem>
+        </ul>
+      </Container>
     </nav>
   );
 };

@@ -2,10 +2,9 @@ import { ReactElement } from "react";
 
 import styles from "./Window.module.scss";
 
-interface Props {
+interface Props extends ModalProps {
   title: string;
   children?: ReactElement;
-  onClose: () => void;
 }
 
 export const Window = (props: Props) => {

@@ -1,6 +1,6 @@
-import { models, model, Schema } from "mongoose";
+import { models, model, Schema, Model } from "mongoose";
 
-const userSchema = new Schema(
+const userSchema = new Schema<UserDocument>(
   {
     username: {
       type: String,
@@ -26,4 +26,5 @@ userSchema.set("toJSON", {
   },
 });
 
-export const User = models.User || model("User", userSchema);
+export const User: Model<UserDocument> =
+  models.User || model("User", userSchema);

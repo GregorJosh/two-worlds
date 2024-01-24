@@ -1,42 +1,26 @@
 "use server";
 
-import { db, query } from "@/libs";
+import { db } from "@/libs";
 
-const queryForArticleByTitle = (title: string) => {
-  const result = query(db.Article, { title });
-
-  if (!result) {
-    db.errors.push(`Article with ${title} title does not exist!`);
-
-    return null;
-  }
-
-  return result;
-};
-
-export const getArticleByTitle = async (
-  title: string
-): Promise<ActionResult<ArticleDocument>> => {
-  const article = queryForArticleByTitle(title);
+export const getArticle = async (name: string) => {
+  const article = await db.Article.findOne({ name }).lean();
 
   if (!article) {
-    return [null, db.errors];
+    throw `Get Article: Article with name ${name} does not exist!`;
   }
 
-  return [await article.lean(), null];
+  return article;
 };
 
-export const updateArticleByTitle = async (
-  title: string,
-  formData: FormData
-) => {
-  const article = await queryForArticleByTitle(title);
+export const updateArticle = async (name: string, formData: FormData) => {
+  const article = await db.Article.findOne({ name });
 
   if (!article) {
-    return [null, db.errors];
+    throw `Update Article: Article with name ${name} does not exist!`;
   }
 
   article.title = formData.get("title") as string;
   article.content = formData.getAll("paragraph") as string[];
+
   await article.save();
 };

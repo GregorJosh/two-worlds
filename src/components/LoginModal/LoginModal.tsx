@@ -5,16 +5,12 @@ import { Container, Form, FormField, Window } from "..";
 
 import styles from "./LoginModal.module.scss";
 
-interface Props {
-  onClose: () => void;
-}
-
 interface FormElements extends HTMLFormControlsCollection {
   username: HTMLInputElement;
   password: HTMLInputElement;
 }
 
-export const LoginModal = (props: Props) => {
+export const LoginModal = (props: ModalProps) => {
   const router = useRouter();
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {

@@ -1,0 +1,15 @@
+.container {
+  position: relative;
+
+  .hidden {
+    display: none;
+
+    position: absolute;
+  }
+
+  .visible {
+    @extend .hidden;
+
+    display: block;
+  }
+}

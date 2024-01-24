@@ -33,14 +33,3 @@ export const setAuthCookies = (authTokens: AuthTokens) => {
     secure: true,
   });
 };
-
-export const isAuthenticated = () => {
-  try {
-    const accessToken = cookies().get("accessToken")?.value ?? "";
-    const decodedToken = jwt.verify(accessToken, process.env.JWT_SECRET_KEY!);
-
-    return decodedToken.sub as string;
-  } catch {
-    return false;
-  }
-};

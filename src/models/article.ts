@@ -1,7 +1,13 @@
 import { model, Schema, Model, models } from "mongoose";
 
-const articleSchema = new Schema<ArticleDocument, Model<ArticleDocument>>(
+const articleSchema = new Schema<ArticleDocument>(
   {
+    name: {
+      type: String,
+      unique: true,
+      required: true,
+      readonly: true,
+    },
     title: {
       type: String,
       unique: true,

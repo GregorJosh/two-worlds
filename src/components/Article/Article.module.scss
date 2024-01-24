@@ -1,10 +1,14 @@
 .article {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
 
-    border-radius: 8px;
-    background-color: rgba(0, 0, 0, 0.644);
-    backdrop-filter: blur(4px);
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.644);
+  backdrop-filter: blur(4px);
+
+  & p {
+    text-align: left;
+  }
 }

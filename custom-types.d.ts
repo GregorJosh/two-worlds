@@ -2,6 +2,14 @@ interface PropsWithClassName {
   className?: string;
 }
 
+interface ModalProps {
+  onClose?: () => void | undefined;
+}
+
+interface Styles {
+  readonly [key: string]: string;
+}
+
 interface RouteHandlers {
   [key: string]: RouteHandler;
 }
@@ -12,12 +20,13 @@ interface ResponseBody {
   message: string;
 }
 
-interface User {
+interface UserDocument {
   username: string;
   password: string;
 }
 
 interface ArticleDocument {
+  name: string;
   title: string;
   content: string[];
 }

@@ -1,4 +1,17 @@
-.ul {
+.nav {
+  .container {
+    height: 100%;
+    padding: 20px;
     display: flex;
-    gap: 20px;
+    justify-content: center;
+    gap: 10px;
+  }
+}
+
+.container {
+  .ul {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
 }
