@@ -13,4 +13,8 @@
     background-color: vars.$primaryLightColor;
     cursor: pointer;
   }
+
+  &:disabled {
+    background-color: vars.$primaryColor;
+  }
 }
