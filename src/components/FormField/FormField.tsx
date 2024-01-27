@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { InputHTMLAttributes, ReactElement } from "react";
 
 import styles from "./FormField.module.scss";
 
@@ -8,10 +8,12 @@ interface Props {
 }
 
 export const FormField = (props: Props) => {
+  const { children } = props;
+
   return (
-    <label className={styles["form-field"]}>
+    <label className={styles["form-field"]} htmlFor={children.props.id}>
       {props.label}
-      {props.children}
+      {children}
     </label>
   );
 };
