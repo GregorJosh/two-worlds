@@ -10,16 +10,6 @@ interface Styles {
   readonly [key: string]: string;
 }
 
-interface RouteHandlers {
-  [key: string]: RouteHandler;
-}
-
-interface ResponseBody {
-  status: string;
-  code: number;
-  message: string;
-}
-
 interface UserDocument {
   username: string;
   password: string;
@@ -36,18 +26,19 @@ interface AuthTokens {
   refreshToken: string;
 }
 
+type ActionResultStatus = "success" | "error" | "unknown";
+
+interface ActionResult<DataType = null> {
+  status: ActionResultStatus;
+  message: string;
+  data?: DataType;
+}
+
+type Fun = () => void;
+
 type FormInputElement =
   | HTMLInputElement
   | HTMLTextAreaElement
   | HTMLOptionElement;
 
-type RouteHandler = (request: Request, ...args: any) => unknown;
-
-type ErrorMessage = string;
-type ErrorMessages = string[];
-
-type ActionResult<DocumentType> = [DocumentType | null, ErrorMessages | null];
-
-type OnSubmitHandler = (
-  event: FormEvent<HTMLFormElement>
-) => Promise<ErrorMessage | void>;
+type ActionHandler = (formData: FormData) => Promise<ActionResult>;
