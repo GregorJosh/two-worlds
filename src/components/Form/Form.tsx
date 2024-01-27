@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, FormHTMLAttributes, ReactElement, useState } from "react";
+import { FormHTMLAttributes, ReactElement, useState } from "react";
 import { useFormStatus } from "react-dom";
 
 import { FormField, Button } from "..";
@@ -9,47 +9,86 @@ import styles from "./Form.module.scss";
 
 type FormField = typeof FormField;
 
-interface Props extends FormHTMLAttributes<HTMLFormElement> {
+interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
   children: ReactElement<FormField>[] | ReactElement<FormField>;
-  onSubmit?: OnSubmitHandler;
-  error?: string;
+  action: ActionHandler;
+  onSuccess?: Fun;
+  onFailed?: Fun;
   className?: string;
   buttonClassName?: string;
 }
 
-export const Form = (props: Props) => {
-  const [error, setError] = useState<string | boolean>(false);
-  const { pending } = useFormStatus();
-  const { children, buttonClassName, ...restProps } = props;
+const useFormState = (
+  action: ActionHandler,
+  onSuccess?: Fun,
+  onFailed?: Fun
+) => {
+  const [status, setStatus] = useState<ActionResultStatus>("unknown");
+  const [message, setMessage] = useState<string | false>(false);
 
-  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (props.onSubmit) {
-      const error = await props.onSubmit(event);
-
-      if (error) {
-        setError(error);
-        setTimeout(() => setError(false), 5000);
-      }
-    }
+  const clearState = () => {
+    setStatus("unknown");
+    setMessage(false);
   };
+
+  const formAction = async (formData: FormData) => {
+    const result = await action(formData);
+
+    if (result.status === "success" && onSuccess) {
+      onSuccess();
+    }
+
+    if (result.status === "error" && onFailed) {
+      onFailed();
+    }
+
+    setStatus(result.status);
+    setMessage(result.message);
+    setTimeout(clearState, 5000);
+  };
+
+  return [status, message, formAction] as const;
+};
+
+const Submit = ({ className }: PropsWithClassName) => {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button
+      className={className}
+      type="submit"
+      disabled={pending}
+    >
+      Submit
+    </Button>
+  );
+};
+
+export const Form = (props: FormProps) => {
+  const {
+    action,
+    onSuccess,
+    onFailed,
+    children,
+    buttonClassName,
+    ...restProps
+  } = props;
+
+  const [status, message, formAction] = useFormState(
+    action,
+    onSuccess,
+    onFailed
+  );
 
   return (
     <form
       {...restProps}
       className={`${styles.form} ${props.className}`}
-      onSubmit={props.onSubmit && onSubmit}
+      action={formAction}
     >
-      {error && <p>{error}</p>}
-      {props.children}
-      <Button
-        className={props.buttonClassName}
-        type="submit"
-        aria-disabled={pending}
-      >
-        Submit
-      </Button>
+      {status === "error" && <p>{message}</p>}
+      {children}
+      <Submit className={buttonClassName} />
     </form>
   );
 };
