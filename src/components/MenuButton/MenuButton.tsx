@@ -3,8 +3,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { Container } from "..";
-
 import styles from "./MenuButton.module.scss";
 
 export const MenuButton = () => {
@@ -27,14 +25,12 @@ export const MenuButton = () => {
   }, []);
 
   return (
-    <Container className={styles.container}>
-      <button
-        className={isHidden ? hidden : visible}
-        type="button"
-        onClick={() => router.push("/menu")}
-      >
-        MENU
-      </button>
-    </Container>
+    <button
+      className={isHidden ? hidden : visible}
+      type="button"
+      onClick={() => router.push("/menu")}
+    >
+      MENU
+    </button>
   );
 };
