@@ -9,19 +9,22 @@ export const metadata = {
 
 export default async function HomePage() {
   const isAuth = getIsAuth();
-  const article = await getArticle("home_welcome");
+  const articleName = "home_welcome";
+  const article = await getArticle(articleName);
 
-  const onSubmit = async (formData: FormData) => {
+  const updateArticleAction = async (formData: FormData) => {
     "use server";
 
-    await updateArticle(article.name, formData);
+    const result = await updateArticle(formData, articleName);
     revalidatePath("/");
+
+    return result;
   };
 
   return (
     <>
       {isAuth && (
-        <Form action={onSubmit}>
+        <Form action={updateArticleAction}>
           <FormField label="Title">
             <input type="text" name="title" defaultValue={article.title} />
           </FormField>
