@@ -1,15 +1,13 @@
-.container {
-  position: relative;
+.hidden {
+  display: none;
 
-  .hidden {
-    display: none;
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+}
 
-    position: absolute;
-  }
+.visible {
+  @extend .hidden;
 
-  .visible {
-    @extend .hidden;
-
-    display: block;
-  }
+  display: block;
 }
