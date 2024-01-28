@@ -1,4 +1,4 @@
-import { Backdrop, Menu } from "..";
+import { Backdrop, Footer, Menu } from "..";
 
 import styles from "./MenuModal.module.scss";
 
@@ -9,6 +9,7 @@ export const MenuModal = (props: ModalProps) => {
       <button className={styles.button} onClick={props.onClose} type="button">
         &#9587;
       </button>
+      <Footer />
     </Backdrop>
   );
 };
