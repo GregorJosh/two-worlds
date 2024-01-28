@@ -1,18 +1,16 @@
 import { Container, MenuItem } from "..";
 
-import defaultStyles from "./Menu.module.scss";
-
-interface Props extends PropsWithClassName {
-  customStyles?: Styles;
+interface Props {
+  navClassName: string;
+  ulClassName: string;
+  containerClassName?: string;
 }
 
 export const Menu = (props: Props) => {
-  const styles = props.customStyles || defaultStyles;
-
   return (
-    <nav className={`${styles.nav} ${props.className}`}>
-      <Container className={styles.container}>
-        <ul className={styles.ul}>
+    <nav className={props.navClassName}>
+      <Container className={props.containerClassName}>
+        <ul className={props.ulClassName}>
           <MenuItem href="/">Home</MenuItem>
           <MenuItem href="/dev">Dev World</MenuItem>
           <MenuItem href="/music">Music World</MenuItem>
