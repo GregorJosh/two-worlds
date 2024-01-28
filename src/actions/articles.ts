@@ -12,15 +12,27 @@ export const getArticle = async (name: string) => {
   return article;
 };
 
-export const updateArticle = async (name: string, formData: FormData) => {
-  const article = await db.Article.findOne({ name });
+export const updateArticle = async (formData: FormData, name: string) => {
+  try {
+    const article = await db.Article.findOne({ name });
 
-  if (!article) {
-    throw `Update Article: Article with name ${name} does not exist!`;
+    if (!article) {
+      throw `Update Article: Article with name ${name} does not exist!`;
+    }
+
+    article.title = formData.get("title") as string;
+    article.content = formData.getAll("paragraph") as string[];
+
+    await article.save();
+
+    return {
+      status: "success" as ActionResultStatus,
+      message: `Article ${name} successfully updated!`,
+    };
+  } catch (error: any) {
+    return {
+      status: "error" as ActionResultStatus,
+      message: error.message ?? error,
+    };
   }
-
-  article.title = formData.get("title") as string;
-  article.content = formData.getAll("paragraph") as string[];
-
-  await article.save();
 };
