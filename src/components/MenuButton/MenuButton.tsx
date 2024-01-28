@@ -28,7 +28,7 @@ export const MenuButton = () => {
     <button
       className={isHidden ? hidden : visible}
       type="button"
-      onClick={() => router.push("/menu")}
+      onClick={() => router.push("/menu", { scroll: false })}
     >
       MENU
     </button>
