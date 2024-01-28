@@ -6,7 +6,7 @@ export const Header = (props: PropsWithClassName) => {
   return (
     <header className={`${styles.header} ${props.className}`}>
       <Container className={styles.container}>
-        <Menu />
+        <Menu navClassName={styles.nav} ulClassName={styles.menu} />
       </Container>
     </header>
   );
