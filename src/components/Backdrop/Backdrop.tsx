@@ -10,11 +10,11 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Backdrop = (props: Props) => {
-  const { children, ...restProps } = props;
+  const { children, containerClassName, ...restProps } = props;
 
   return (
     <div {...restProps} className={`${styles.backdrop} ${props.className}`}>
-      <Container className={`${styles.container} ${props.containerClassName}`}>
+      <Container className={`${styles.container} ${containerClassName}`}>
         {children}
       </Container>
     </div>
