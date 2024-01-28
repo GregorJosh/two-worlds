@@ -1,15 +1,11 @@
 $headerHeight: 50px;
 
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: $headerHeight;
+  display: none;
 }
 
 .container {
-  padding: $headerHeight + 20px 0;
+  padding: 20px 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -18,9 +14,5 @@ $headerHeight: 50px;
 }
 
 .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: $headerHeight;
+  display: none;
 }
