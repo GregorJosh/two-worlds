@@ -41,4 +41,7 @@ type FormInputElement =
   | HTMLTextAreaElement
   | HTMLOptionElement;
 
-type ActionHandler = (formData: FormData) => Promise<ActionResult>;
+type ActionHandler = (
+  formData: FormData,
+  ...args: any
+) => Promise<ActionResult>;
