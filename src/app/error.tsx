@@ -8,23 +8,20 @@ import styles from "./error.module.scss";
 
 interface Props {
   error?: Error;
-  reset?: () => void;
-  errors?: ErrorMessages;
+  reset?: Fun;
 }
 
 export default function HomeErrorPage(props: Props) {
-  const { error, errors, reset } = props;
+  const { error, reset } = props;
 
   useEffect(() => {
     error && console.error(error.message);
-    errors && console.error(errors);
-  }, [error, errors]);
+  }, [error]);
 
   return (
     <Container className={styles.container}>
       <h2>Something went wrong!</h2>
       {error && <p>{error.message}</p>}
-      {errors && errors.map((error, id) => <p key={id}>{error}</p>)}
       {reset && <Button onClick={() => reset()}>Try again</Button>}
     </Container>
   );
