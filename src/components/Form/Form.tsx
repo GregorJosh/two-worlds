@@ -34,6 +34,10 @@ const useFormState = (
   const formAction = async (formData: FormData) => {
     const result = await action(formData);
 
+    setStatus(result.status);
+    setMessage(result.message);
+    setTimeout(clearState, 5000);
+
     if (result.status === "success" && onSuccess) {
       onSuccess();
     }
@@ -41,10 +45,6 @@ const useFormState = (
     if (result.status === "error" && onFailed) {
       onFailed();
     }
-
-    setStatus(result.status);
-    setMessage(result.message);
-    setTimeout(clearState, 5000);
   };
 
   return [status, message, formAction] as const;
@@ -54,11 +54,7 @@ const Submit = ({ className }: PropsWithClassName) => {
   const { pending } = useFormStatus();
 
   return (
-    <Button
-      className={className}
-      type="submit"
-      disabled={pending}
-    >
+    <Button className={className} type="submit" disabled={pending}>
       Submit
     </Button>
   );
