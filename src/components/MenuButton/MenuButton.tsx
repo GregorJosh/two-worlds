@@ -13,8 +13,10 @@ export const MenuButton = () => {
   useEffect(() => {
     const eventType = "mousemove";
     const onScroll = () => {
-      setIsHidden(false);
-      setTimeout(() => setIsHidden(true), 3000);
+      if (isHidden) {
+        setIsHidden(false);
+        setTimeout(() => setIsHidden(true), 5000);
+      }
     };
 
     window.addEventListener(eventType, onScroll);
@@ -22,7 +24,7 @@ export const MenuButton = () => {
     return () => {
       window.removeEventListener(eventType, onScroll);
     };
-  }, []);
+  });
 
   return (
     <button
