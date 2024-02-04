@@ -1,6 +1,6 @@
 "use server";
 
-import { authenticate, db, isAuth } from "@/libs";
+import { authenticate, db, unsetAuthCookies } from "@/libs";
 import { authSigninSchema } from "@/schemas";
 
 export const signIn = async (formData: FormData): Promise<ActionResult> => {
@@ -30,6 +30,6 @@ export const signIn = async (formData: FormData): Promise<ActionResult> => {
   }
 };
 
-export const getIsAuth = () => {
-  return isAuth();
+export const signOut = () => {
+  unsetAuthCookies();
 };
