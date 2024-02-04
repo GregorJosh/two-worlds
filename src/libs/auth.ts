@@ -34,6 +34,11 @@ export const setAuthCookies = (authTokens: AuthTokens) => {
   });
 };
 
+export const unsetAuthCookies = () => {
+  cookies().set("accessToken", "");
+  cookies().set("refreshToken", "");
+};
+
 export const isAuth = () => {
   try {
     const accessToken = cookies().get("accessToken")?.value ?? "";
