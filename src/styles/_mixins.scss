@@ -1,0 +1,16 @@
+@use "vars";
+
+@mixin button {
+  background-color: transparent;
+  color: vars.$textColor;
+  border: 1px solid vars.$textColor;
+  padding: 10px;
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  &:hover {
+    border-color: white;
+    color: white;
+  }
+}
