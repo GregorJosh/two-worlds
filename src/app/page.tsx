@@ -1,16 +1,17 @@
 import { revalidatePath } from "next/cache";
 
+import { isAuth } from "@/libs";
 import { Article, Form, FormField } from "@/components";
-import { getIsAuth, getArticle, updateArticle } from "@/actions";
+import { getArticle, updateArticle } from "@/actions";
 
 export const metadata = {
   title: "Two Worlds: Home",
 };
 
 export default async function HomePage() {
-  const isAuth = getIsAuth();
   const articleName = "home_welcome";
   const article = await getArticle(articleName);
+  const auth = isAuth();
 
   const updateArticleAction = async (formData: FormData) => {
     "use server";
@@ -23,7 +24,7 @@ export default async function HomePage() {
 
   return (
     <>
-      {isAuth && (
+      {auth && (
         <Form action={updateArticleAction}>
           <FormField label="Title">
             <input type="text" name="title" defaultValue={article.title} />
