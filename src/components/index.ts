@@ -11,3 +11,5 @@ export * from "./SolarSystem/SolarSystem";
 export * from "./Footer/Footer";
 export * from "./MenuButton/MenuButton";
 export * from "./Window/Window";
+export * from "./Loader/Loader";
+export * from "./Providers/Providers";
