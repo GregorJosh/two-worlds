@@ -1,16 +1,18 @@
 import { ReactNode } from "react";
 
-import { rubik } from "@/fonts";
-
+import { isAuth } from "@/libs";
 import {
   Container,
   Footer,
   Header,
   MenuButton,
   SolarSystem,
+  Providers,
 } from "@/components";
+import { rubik } from "@/fonts";
 
 import "@/styles/global.scss";
+
 import styles from "./layout.module.scss";
 
 interface Props {
@@ -23,7 +25,7 @@ export const dynamic = "force-dynamic";
 export default function RootLayout(props: Props) {
   return (
     <html lang="en">
-      <body className={`${rubik.variable}`}>
+      <body className={rubik.variable}>
         <Header className={styles.header} />
         <Container className={styles.container}>
           <SolarSystem />
@@ -31,7 +33,7 @@ export default function RootLayout(props: Props) {
         </Container>
         <Footer className={styles.footer} />
         <MenuButton />
-        {props.modal}
+        <Providers isAuth={isAuth()}>{props.modal}</Providers>
       </body>
     </html>
   );
