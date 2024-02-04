@@ -1,5 +1,6 @@
 import { HTMLAttributes } from "react";
-import { Container, MenuItem } from "..";
+
+import { Container } from "..";
 
 interface Props extends HTMLAttributes<HTMLElement> {
   navClassName?: string;
@@ -9,20 +10,17 @@ interface Props extends HTMLAttributes<HTMLElement> {
 
 export const Menu = (props: Props) => {
   const {
-    navClassName = "",
-    ulClassName = "",
-    containerClassName = "",
+    navClassName,
+    ulClassName,
+    containerClassName,
+    children,
     ...restProps
   } = props;
 
   return (
     <nav {...restProps} className={navClassName}>
       <Container className={containerClassName}>
-        <ul className={ulClassName}>
-          <MenuItem href="/">Home</MenuItem>
-          <MenuItem href="/dev">Dev World</MenuItem>
-          <MenuItem href="/music">Music World</MenuItem>
-        </ul>
+        <ul className={ulClassName}>{children}</ul>
       </Container>
     </nav>
   );
