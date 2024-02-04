@@ -16,7 +16,9 @@ export default function SigninModal() {
   };
 
   const onSuccess = () => {
-    router.push("/");
+    router.back();
+    router.back();
+    router.refresh();
   };
 
   if (pathname !== "/signin") {
