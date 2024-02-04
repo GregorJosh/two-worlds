@@ -24,6 +24,7 @@ export default function MenuModal() {
   };
 
   if (pathname !== "/menu") {
+    router.refresh();
     return null;
   }
 
