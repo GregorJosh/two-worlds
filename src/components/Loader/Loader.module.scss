@@ -1,0 +1,20 @@
+@use "/src/styles/vars";
+
+.container {
+  $width: 80%;
+  $height: 50%;
+
+  position: fixed;
+  top: 50% - ($height / 2);
+  left: 50% - ($width / 2);
+  width: $width;
+  height: $height;
+
+  background-color: vars.$secondaryColor;
+  border: 1px solid vars.$secondaryLightColor;
+  border-radius: 4px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
