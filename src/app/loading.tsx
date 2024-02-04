@@ -1,9 +1,5 @@
-import { Container } from "@/components";
+import { Loader } from "@/components";
 
 export default function LoadingHomePage() {
-  return (
-    <Container>
-      <p>Loading Home Page...</p>
-    </Container>
-  );
+  return <Loader message="Loading Home Page..." />;
 }
