@@ -21,8 +21,9 @@ interface Props {
 }
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-export default function RootLayout(props: Props) {
+export default async function RootLayout(props: Props) {
   return (
     <html lang="en">
       <body className={rubik.variable}>
