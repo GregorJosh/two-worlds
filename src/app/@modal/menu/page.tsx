@@ -20,11 +20,9 @@ export default function MenuModal() {
   const onSignOut = () => {
     signOut();
     router.back();
-    router.refresh();
   };
 
   if (pathname !== "/menu") {
-    router.refresh();
     return null;
   }
 
@@ -35,7 +33,7 @@ export default function MenuModal() {
         <MenuItem href="/dev">Dev World</MenuItem>
         <MenuItem href="/music">Music World</MenuItem>
         {isAuth && (
-          <MenuItem href="/" onClick={onSignOut}>
+          <MenuItem href="#" onClick={onSignOut}>
             Sign out
           </MenuItem>
         )}
