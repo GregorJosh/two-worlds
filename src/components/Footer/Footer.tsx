@@ -16,7 +16,7 @@ export const Footer = (props: PropsWithClassName) => {
         <p>
           © 2024{" "}
           {!isAuth ? (
-            <Link href="/signin" scroll={false}>
+            <Link href="/signin" scroll={false} prefetch={false}>
               Grzegorz Jóźwiak
             </Link>
           ) : (

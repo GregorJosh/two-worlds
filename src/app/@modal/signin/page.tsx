@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { signIn } from "@/actions";
 import { Backdrop, Window, Form, FormField } from "@/components";
@@ -9,29 +9,32 @@ import styles from "./page.module.scss";
 
 export default function SigninModal() {
   const router = useRouter();
-  const pathname = usePathname();
 
   const onClose = () => {
     router.back();
   };
 
-  const onSuccess = () => {
-    router.back();
-    router.back();
-    router.refresh();
-  };
+  const onSignIn: ActionHandler = async (formData) => {
+    const result = await signIn(formData);
 
-  if (pathname !== "/signin") {
-    return null;
-  }
+    if (result.status === "success") {
+      router.back();
+      router.back();
+      router.refresh();
+
+      return;
+    }
+
+    return result;
+  };
 
   return (
     <Backdrop>
-      <Window title="Log in to Admin Panel" onClose={onClose}>
+      <Window title="Login" onClose={onClose}>
         <Form
+          className={styles.form}
           buttonClassName={styles["submit-btn"]}
-          action={signIn}
-          onSuccess={onSuccess}
+          action={onSignIn}
         >
           <FormField label="Username:">
             <input
