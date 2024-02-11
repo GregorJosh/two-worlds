@@ -1,5 +1,5 @@
 import { Loader } from "@/components";
 
-export default function LoadingHomePage() {
+export default function HomeLoadingPage() {
   return <Loader message="Loading Home Page..." />;
 }
