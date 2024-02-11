@@ -44,4 +44,4 @@ type FormInputElement =
 type ActionHandler = (
   formData: FormData,
   ...args: any
-) => Promise<ActionResult>;
+) => Promise<ActionResult | null | undefined>;
