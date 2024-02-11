@@ -23,6 +23,10 @@ interface Props {
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
+export const metadata = {
+  title: "Two Worlds",
+};
+
 export default async function RootLayout(props: Props) {
   return (
     <html lang="en">
