@@ -17,7 +17,10 @@ export default async function HomePage() {
     "use server";
 
     const result = await updateArticle(formData, articleName);
-    revalidatePath("/");
+
+    if (result.status === "success") {
+      revalidatePath("/", "layout");
+    }
 
     return result;
   };
