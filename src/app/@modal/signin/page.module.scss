@@ -1,5 +1,13 @@
 @use "/src/styles/vars";
 
-.submit-btn {
-  background-color: vars.$primaryColor;
+.form {
+  .submit-btn {
+    background-color: vars.$primaryColor;
+
+    &:disabled {
+      background-color: vars.$secondaryColor;
+      color: vars.$primaryColor;
+      cursor: not-allowed;
+    }
+  }
 }
