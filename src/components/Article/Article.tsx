@@ -1,10 +1,9 @@
-import { ReactElement } from "react";
+import { PropsWithChildren, ReactElement } from "react";
 
 import styles from "./Article.module.scss";
 
-interface Props {
+interface Props extends PropsWithChildren {
   title: string;
-  children?: ReactElement<HTMLParagraphElement>[];
 }
 
 export const Article = (props: Props) => {
