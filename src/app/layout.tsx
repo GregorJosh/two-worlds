@@ -27,7 +27,7 @@ export const metadata = {
   title: "Two Worlds",
 };
 
-export default async function RootLayout(props: Props) {
+export default function RootLayout(props: Props) {
   return (
     <html lang="en">
       <body className={rubik.variable}>
