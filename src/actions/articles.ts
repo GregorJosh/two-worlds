@@ -1,5 +1,8 @@
 "use server";
 
+import { unlink, writeFile } from "fs/promises";
+import { join } from "path";
+
 import { db } from "@/libs";
 
 export const getArticle = async (name: string) => {
@@ -12,7 +15,10 @@ export const getArticle = async (name: string) => {
   return article;
 };
 
-export const updateArticle = async (formData: FormData, name: string) => {
+export const updateArticle = async (
+  formData: FormData,
+  name: string
+): Promise<ActionResult> => {
   try {
     const article = await db.Article.findOne({ name });
 
@@ -23,16 +29,46 @@ export const updateArticle = async (formData: FormData, name: string) => {
     article.title = formData.get("title") as string;
     article.content = formData.getAll("paragraph") as string[];
 
+    const images = formData.getAll("image") as File[];
+
+    for (const image of images) {
+      const { name } = image;
+
+      if (name !== "undefined") {
+        const imageData = Buffer.from(await image.arrayBuffer());
+        const path = join(process.cwd(), "public", name);
+
+        await writeFile(path, imageData);
+
+        article.images.push(name);
+      }
+    }
+
     await article.save();
 
     return {
-      status: "success" as ActionResultStatus,
+      status: "success",
       message: `Article ${name} successfully updated!`,
     };
   } catch (error: any) {
     return {
-      status: "error" as ActionResultStatus,
+      status: "error",
       message: error.message ?? error,
     };
   }
+};
+
+export const removeImage = async (formData: FormData, articleName: string) => {
+  const article = await db.Article.findOne({ name: articleName });
+
+  const imageFilename = formData.get("image-filename") as string;
+  const imagePath = join(process.cwd(), "public", imageFilename);
+
+  if (!article) {
+    throw `Remove Image: Article with name ${articleName} does not exist!`;
+  }
+
+  article.images.splice(article.images.indexOf(imageFilename), 1);
+  await article.save();
+  await unlink(imagePath);
 };
