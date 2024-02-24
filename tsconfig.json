@@ -18,9 +18,10 @@
         "name": "next"
       }
     ],
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"],
-      "@/fonts": ["./src/styles/fonts"]
+      "@/*": ["src/*"],
+      "@/fonts": ["src/styles/fonts"]
     }
   },
   "include": [
