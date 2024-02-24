@@ -19,6 +19,7 @@ interface ArticleDocument {
   name: string;
   title: string;
   content: string[];
+  images: string[];
 }
 
 interface AuthTokens {
