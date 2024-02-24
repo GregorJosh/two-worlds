@@ -17,6 +17,10 @@ const articleSchema = new Schema<ArticleDocument>(
       type: [String],
       required: true,
     },
+    images: {
+      type: [String],
+      required: true,
+    },
   },
   {
     timestamps: true,
