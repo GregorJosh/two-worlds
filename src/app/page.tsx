@@ -2,8 +2,8 @@ import { revalidatePath } from "next/cache";
 import Image from "next/image";
 
 import { isAuth } from "@/libs";
-import { getArticle, removeImage, updateArticle } from "@/actions";
-import { Article, Button, Form, FormField } from "@/components";
+import { getArticle, removeImage } from "@/actions";
+import { Article, ArticleEditor, Button } from "@/components";
 
 import styles from "./page.module.scss";
 
@@ -16,20 +16,6 @@ export default async function HomePage() {
   const article = await getArticle(articleName);
   const auth = isAuth();
 
-  const onUpdateArticle: ActionHandler = async (formData) => {
-    "use server";
-
-    const result = await updateArticle(formData, articleName);
-
-    if (result.status === "success") {
-      revalidatePath("/", "layout");
-
-      return;
-    }
-
-    return result;
-  };
-
   const onRemoveImage = async (formData: FormData) => {
     "use server";
 
@@ -39,28 +25,7 @@ export default async function HomePage() {
 
   return (
     <>
-      {auth && (
-        <Form action={onUpdateArticle}>
-          <FormField label="Title">
-            <input type="text" name="title" defaultValue={article.title} />
-          </FormField>
-          <>
-            {article.content.map((paragraph, id) => {
-              return (
-                <FormField key={id} label="Paragraph">
-                  <textarea
-                    name="paragraph"
-                    defaultValue={paragraph}
-                  ></textarea>
-                </FormField>
-              );
-            })}
-          </>
-          <FormField label="Image">
-            <input type="file" name="image" accept="image/*" />
-          </FormField>
-        </Form>
-      )}
+      {auth && <ArticleEditor article={article} />}
       <Article title={article.title}>
         {article.content.map((paragraph, id) => {
           return <p key={id}>{paragraph}</p>;
