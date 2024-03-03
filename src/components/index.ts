@@ -7,6 +7,7 @@ export * from "./Header/Header";
 export * from "./Menu/Menu";
 export * from "./MenuItem/MenuItem";
 export * from "./Article/Article";
+export * from "./ArticleEditor/ArticleEditor";
 export * from "./SolarSystem/SolarSystem";
 export * from "./Footer/Footer";
 export * from "./MenuButton/MenuButton";
