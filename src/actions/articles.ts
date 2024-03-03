@@ -1,16 +1,18 @@
 "use server";
 
-import { unlink, writeFile } from "fs/promises";
+import { unlink, writeFile, access } from "fs/promises";
 import { join } from "path";
 
 import { db } from "@/libs";
 
 export const getArticle = async (name: string) => {
-  const article = await db.Article.findOne({ name }).lean();
+  const result = await db.Article.findOne({ name }).lean();
 
-  if (!article) {
+  if (!result) {
     throw `Get Article: Article with name ${name} does not exist!`;
   }
+
+  const { _id, ...article } = result;
 
   return article;
 };
@@ -70,5 +72,11 @@ export const removeImage = async (formData: FormData, articleName: string) => {
 
   article.images.splice(article.images.indexOf(imageFilename), 1);
   await article.save();
-  await unlink(imagePath);
+
+  try {
+    await access(imagePath);
+    await unlink(imagePath);
+  } catch {}
 };
+
+
