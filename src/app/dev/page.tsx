@@ -5,5 +5,5 @@ export const metadata = {
 };
 
 export default function DevPage() {
-  return <Article title="My Developer World" />;
+  return <Article content="Dev Page" />;
 }

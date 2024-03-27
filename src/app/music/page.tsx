@@ -5,5 +5,5 @@ export const metadata = {
 };
 
 export default function MusicPage() {
-  return <Article title="My Music World" />;
+  return <Article content="My Music World" />;
 }
