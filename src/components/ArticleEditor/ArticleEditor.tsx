@@ -2,10 +2,12 @@
 
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import { MouseEventHandler, useRef } from "react";
+import Editor from "ckeditor5/ckeditor";
 
-import { updateArticle } from "@/actions";
+import { updateArticle, addImage } from "@/actions";
 
-import { Form, FormField } from "..";
+import { Button } from "..";
 
 export const ArticleEditor = ({ article }: { article: ArticleDocument }) => {
   const RichTextEditor = dynamic(
@@ -13,40 +15,40 @@ export const ArticleEditor = ({ article }: { article: ArticleDocument }) => {
     { ssr: false }
   );
 
-  const { name, title, content, images } = article;
+  const { name, content } = article;
   const router = useRouter();
+  const editorRef = useRef<Editor>();
 
-  const onUpdateArticle: ActionHandler = async (formData) => {
-    const result = await updateArticle(formData, name);
+  const onEditorReady = (editor: Editor) => {
+    editorRef.current = editor;
+  };
 
-    if (result.status === "success") {
-      router.refresh();
-      return;
-    }
+  const onImageUpload = async (image: File) => {
+    const formData = new FormData();
+    formData.set("image", image);
+    debugger;
 
-    return result;
+    const imageURL = await addImage(formData, name);
+
+    return { default: imageURL, "280": imageURL };
+  };
+
+  const onUpdateArticle: MouseEventHandler = async () => {
+    const formData = new FormData();
+    formData.set("content", editorRef.current!.getData());
+
+    await updateArticle(formData, name);
+    router.refresh();
   };
 
   return (
     <>
-      <Form action={onUpdateArticle}>
-        <FormField label="Title">
-          <input type="text" name="title" defaultValue={title} />
-        </FormField>
-        <>
-          {content.map((paragraph, id) => {
-            return (
-              <FormField key={id} label="Paragraph">
-                <textarea name="paragraph" defaultValue={paragraph}></textarea>
-              </FormField>
-            );
-          })}
-        </>
-        <FormField label="Image">
-          <input type="file" name="image" accept="image/*" />
-        </FormField>
-      </Form>
-      <RichTextEditor />
+      <RichTextEditor
+        content={content}
+        onReady={onEditorReady}
+        onImageUpload={onImageUpload}
+      />
+      <Button onClick={onUpdateArticle}>Submit</Button>
     </>
   );
 };
