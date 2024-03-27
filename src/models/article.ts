@@ -8,19 +8,11 @@ const articleSchema = new Schema<ArticleDocument>(
       required: true,
       readonly: true,
     },
-    title: {
-      type: String,
-      unique: true,
-      required: true,
-    },
     content: {
-      type: [String],
+      type: String,
       required: true,
     },
-    images: {
-      type: [String],
-      required: true,
-    },
+    images: [String],
   },
   {
     timestamps: true,
