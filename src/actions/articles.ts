@@ -17,66 +17,56 @@ export const getArticle = async (name: string) => {
   return article;
 };
 
-export const updateArticle = async (
-  formData: FormData,
-  name: string
-): Promise<ActionResult> => {
-  try {
-    const article = await db.Article.findOne({ name });
-
-    if (!article) {
-      throw `Update Article: Article with name ${name} does not exist!`;
-    }
-
-    article.title = formData.get("title") as string;
-    article.content = formData.getAll("paragraph") as string[];
-
-    const images = formData.getAll("image") as File[];
-
-    for (const image of images) {
-      const { name } = image;
-
-      if (name !== "undefined") {
-        const imageData = Buffer.from(await image.arrayBuffer());
-        const path = join(process.cwd(), "public", name);
-
-        await writeFile(path, imageData);
-
-        article.images.push(name);
-      }
-    }
-
-    await article.save();
-
-    return {
-      status: "success",
-      message: `Article ${name} successfully updated!`,
-    };
-  } catch (error: any) {
-    return {
-      status: "error",
-      message: error.message ?? error,
-    };
-  }
-};
-
-export const removeImage = async (formData: FormData, articleName: string) => {
-  const article = await db.Article.findOne({ name: articleName });
-
-  const imageFilename = formData.get("image-filename") as string;
-  const imagePath = join(process.cwd(), "public", imageFilename);
+export const updateArticle = async (formData: FormData, name: string) => {
+  const article = await db.Article.findOne({ name });
 
   if (!article) {
-    throw `Remove Image: Article with name ${articleName} does not exist!`;
+    throw `Update Article: Article with name ${name} does not exist!`;
   }
 
-  article.images.splice(article.images.indexOf(imageFilename), 1);
-  await article.save();
+  const images = [...article.images];
 
-  try {
-    await access(imagePath);
-    await unlink(imagePath);
-  } catch {}
+  article.content = formData.get("content") as string;
+
+  for (const filename of images) {
+    if (!article.content.includes(filename)) {
+      const index = article.images.indexOf(filename);
+
+      article.images.splice(index, 1);
+      await removeImage(filename);
+    }
+  }
+
+  await article.save();
 };
 
+type URL = string;
 
+export const addImage = async (
+  fromData: FormData,
+  articleName: string
+): Promise<URL> => {
+  const article = await db.Article.findOne({ name: articleName });
+
+  if (!article) {
+    throw `Add Image: Article with name ${articleName} does not exist!`;
+  }
+
+  const imageFile = fromData.get("image") as File;
+  const imageData = Buffer.from(await imageFile.arrayBuffer());
+  const imagePath = join(process.cwd(), "public", imageFile.name);
+  const url = "/" + imageFile.name;
+
+  await writeFile(imagePath, imageData);
+  article.images.push(imageFile.name);
+  await article.save();
+
+  return url;
+};
+
+export const removeImage = async (filename: string) => {
+  const imagePath = join(process.cwd(), "public", filename);
+
+  await access(imagePath);
+  await unlink(imagePath);
+};
