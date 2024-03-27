@@ -1,11 +1,6 @@
-import { revalidatePath } from "next/cache";
-import Image from "next/image";
-
 import { isAuth } from "@/libs";
-import { getArticle, removeImage } from "@/actions";
-import { Article, ArticleEditor, Button } from "@/components";
-
-import styles from "./page.module.scss";
+import { getArticle } from "@/actions";
+import { Article, ArticleEditor } from "@/components";
 
 export const metadata = {
   title: "Two Worlds: Home",
@@ -16,42 +11,10 @@ export default async function HomePage() {
   const article = await getArticle(articleName);
   const auth = isAuth();
 
-  const onRemoveImage = async (formData: FormData) => {
-    "use server";
-
-    await removeImage(formData, articleName);
-    revalidatePath("/", "layout");
-  };
-
   return (
     <>
       {auth && <ArticleEditor article={article} />}
-      <Article title={article.title}>
-        {article.content.map((paragraph, id) => {
-          return <p key={id}>{paragraph}</p>;
-        })}
-        {article.images.map((image, id) => {
-          return (
-            <div key={id} className={styles.image}>
-              <Image
-                src={`/${image}`}
-                alt={image}
-                sizes="(max-width: 768px) 100vw"
-                fill
-                priority
-              />
-              {auth && (
-                <form action={onRemoveImage}>
-                  <input type="hidden" name="image-filename" value={image} />
-                  <Button className={styles.button} type="submit">
-                    REMOVE
-                  </Button>
-                </form>
-              )}
-            </div>
-          );
-        })}
-      </Article>
+      <Article content={article.content}></Article>
     </>
   );
 }
