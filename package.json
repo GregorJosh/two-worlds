@@ -9,10 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-alignment": "^41.1.0",
     "@ckeditor/ckeditor5-build-classic": "^41.1.0",
+    "@ckeditor/ckeditor5-heading": "^41.1.0",
     "@ckeditor/ckeditor5-react": "^6.2.0",
     "@react-three/fiber": "^8.15.12",
-    "@types/jsonwebtoken": "^9.0.5",
     "joi": "^17.11.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.4",
@@ -22,6 +23,7 @@
     "three": "^0.160.0"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
