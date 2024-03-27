@@ -17,8 +17,7 @@ interface UserDocument {
 
 interface ArticleDocument {
   name: string;
-  title: string;
-  content: string[];
+  content: string;
   images: string[];
 }
 
