@@ -1,16 +1,20 @@
-import { PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren } from "react";
 
 import styles from "./Article.module.scss";
 
 interface Props extends PropsWithChildren {
-  title: string;
+  content: string;
 }
 
 export const Article = (props: Props) => {
+  const contentHTML = {
+    __html: props.content,
+  };
+
   return (
-    <article className={styles.article}>
-      <h1>{props.title}</h1>
-      {props.children}
-    </article>
+    <article
+      className={styles.article}
+      dangerouslySetInnerHTML={contentHTML}
+    ></article>
   );
 };
