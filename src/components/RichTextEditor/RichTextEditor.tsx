@@ -5,6 +5,8 @@ import type { FileLoader, UploadResponse } from "@ckeditor/ckeditor5-upload";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import Editor from "ckeditor5/ckeditor";
 
+import "./ckeditor.scss";
+
 interface Props {
   onReady?: (editor: Editor) => void;
   onImageUpload: (file: File) => Promise<UploadResponse>;
