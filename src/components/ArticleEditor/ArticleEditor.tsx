@@ -48,7 +48,7 @@ export const ArticleEditor = ({ article }: { article: ArticleDocument }) => {
         onReady={onEditorReady}
         onImageUpload={onImageUpload}
       />
-      <Button onClick={onUpdateArticle}>Submit</Button>
+      <Button onClick={onUpdateArticle}>Save</Button>
     </>
   );
 };
