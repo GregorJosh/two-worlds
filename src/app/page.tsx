@@ -13,8 +13,11 @@ export default async function HomePage() {
 
   return (
     <>
-      {auth && <ArticleEditor article={article} />}
-      <Article content={article.content}></Article>
+      {auth ? (
+        <ArticleEditor article={article} />
+      ) : (
+        <Article content={article.content}></Article>
+      )}
     </>
   );
 }
