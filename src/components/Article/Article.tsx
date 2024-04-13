@@ -1,20 +1,32 @@
 import { PropsWithChildren } from "react";
 
+import { getArticle, getIsAuth } from "@/actions";
+import { ArticleEditor } from "..";
+
 import styles from "./Article.module.scss";
 
 interface Props extends PropsWithChildren {
-  content: string;
+  name: string;
 }
 
-export const Article = (props: Props) => {
+export const Article = async (props: Props) => {
+  const article = await getArticle(props.name);
+  const isAuth = getIsAuth();
+
   const contentHTML = {
-    __html: props.content,
+    __html: article.content,
   };
 
   return (
-    <article
-      className={styles.article}
-      dangerouslySetInnerHTML={contentHTML}
-    ></article>
+    <>
+      {isAuth ? (
+        <ArticleEditor article={article} />
+      ) : (
+        <article
+          className={styles.article}
+          dangerouslySetInnerHTML={contentHTML}
+        ></article>
+      )}
+    </>
   );
 };
