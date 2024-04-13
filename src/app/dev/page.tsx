@@ -1,9 +1,14 @@
-import { Article } from "@/components";
+import { Article, Card } from "@/components";
 
 export const metadata = {
   title: "Two Worlds: Dev",
 };
 
 export default function DevPage() {
-  return <Article content="Dev Page" />;
+  return (
+    <>
+      <Article name="dev_welcome" />
+      <Card title="Portfolio" />
+    </>
+  );
 }
