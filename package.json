@@ -18,8 +18,11 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.4",
     "next": "14.0.4",
+    "node-web-audio-api": "^0.21.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-loader-spinner": "^6.1.6",
+    "react-player": "^2.16.0",
     "three": "^0.160.0"
   },
   "devDependencies": {
@@ -28,6 +31,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/three": "^0.160.0",
+    "@types/webaudioapi": "^0.0.27",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "sass": "^1.69.5",
