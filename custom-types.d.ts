@@ -10,15 +10,31 @@ interface Styles {
   readonly [key: string]: string;
 }
 
-interface UserDocument {
-  username: string;
-  password: string;
+namespace Documents {
+  interface User {
+    username: string;
+    password: string;
+  }
+
+  interface Article {
+    name: string;
+    content: string;
+    images: string[];
+  }
+
+  interface Track {
+    artist: string;
+    title: string;
+    style: string;
+    filename: string;
+    duration: string;
+    url: string;
+  }
 }
 
-interface ArticleDocument {
-  name: string;
-  content: string;
-  images: string[];
+interface AudioFileInfo {
+  filename: string;
+  duration: string;
 }
 
 interface AuthTokens {
@@ -26,9 +42,21 @@ interface AuthTokens {
   refreshToken: string;
 }
 
+interface GitHubRepo {
+  id: number;
+  name: string;
+  full_name: string;
+  html_url: string;
+}
+
+interface Product {
+  name: string;
+  url: string;
+}
+
 type ActionResultStatus = "success" | "error" | "unknown";
 
-interface ActionResult<DataType = null> {
+interface ActionResult<DataType> {
   status: ActionResultStatus;
   message: string;
   data?: DataType;
