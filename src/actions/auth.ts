@@ -3,7 +3,9 @@
 import { authenticate, db, unsetAuthCookies, isAuth } from "@/libs";
 import { authSigninSchema } from "@/schemas";
 
-export const signIn = async (formData: FormData): Promise<ActionResult> => {
+export const signIn = async (
+  formData: FormData
+): Promise<ActionResult<null>> => {
   try {
     const username = formData.get("username");
     const password = formData.get("password");
