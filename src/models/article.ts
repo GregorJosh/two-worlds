@@ -1,6 +1,6 @@
-import { model, Schema, Model, models } from "mongoose";
+import Mongoose, { Schema, Model } from "mongoose";
 
-const articleSchema = new Schema<ArticleDocument>(
+const articleSchema = new Schema<Documents.Article>(
   {
     name: {
       type: String,
@@ -24,5 +24,5 @@ articleSchema.set("toJSON", {
   versionKey: false,
 });
 
-export const Article: Model<ArticleDocument> =
-  models.Article || model("Article", articleSchema);
+export const Article: Model<Documents.Article> =
+  Mongoose.models.Article || Mongoose.model("Article", articleSchema);

@@ -1,6 +1,6 @@
-import { models, model, Schema, Model } from "mongoose";
+import Mongoose, { Schema, Model } from "mongoose";
 
-const userSchema = new Schema<UserDocument>(
+const userSchema = new Schema<Documents.User>(
   {
     username: {
       type: String,
@@ -26,5 +26,5 @@ userSchema.set("toJSON", {
   },
 });
 
-export const User: Model<UserDocument> =
-  models.User || model("User", userSchema);
+export const User: Model<Documents.User> =
+  Mongoose.models.User || Mongoose.model("User", userSchema);

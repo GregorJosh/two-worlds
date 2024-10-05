@@ -1,0 +1,44 @@
+@use "/src/styles/vars";
+
+.track {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  border: 1px solid vars.$secondaryLightColor;
+  border-radius: 4px;
+
+  padding: 10px;
+
+  & .header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 400;
+
+    & .cover {
+      width: 20%;
+      height: auto;
+    }
+
+    & .title {
+      font-weight: 200;
+    }
+  }
+
+  & .details {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 200;
+  }
+
+  & .options {
+    display: flex;
+    gap: 10px;
+
+    & .icon {
+      width: 10px;
+      height: auto;
+    }
+  }
+}

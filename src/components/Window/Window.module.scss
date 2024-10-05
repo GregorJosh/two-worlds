@@ -2,9 +2,10 @@
 
 .window {
   $width: 90%;
+  $maxHeight: 90%;
 
   position: absolute;
-  top: 40%;
+  bottom: calc(50% - $maxHeight / 2);
   left: calc(50% - $width / 2);
   width: $width;
 
