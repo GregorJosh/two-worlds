@@ -1,7 +1,7 @@
 @use "/src/styles/vars.scss";
 
 .button {
-  background-color: vars.$secondaryColor;
+  background-color: vars.$primaryLightColor;
   color: vars.$textColor;
   border: none;
   padding: 10px;
@@ -10,11 +10,11 @@
   font-size: 16px;
 
   &:hover {
-    background-color: vars.$primaryLightColor;
+    background-color: vars.$secondaryLightColor;
     cursor: pointer;
   }
 
   &:disabled {
-    background-color: vars.$primaryColor;
+    background-color: vars.$secondaryLightColor;
   }
 }
