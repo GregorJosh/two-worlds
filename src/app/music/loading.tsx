@@ -1,4 +1,7 @@
-export default function Loading() {
-    return <p>Loading Music Page...</p>;
-  }
-  
+import { Loader } from "@/components";
+
+export default function MusicLoadingPage() {
+  console.log("Rendering music loading page...");
+
+  return <Loader message="Loading Music Page..." />;
+}
