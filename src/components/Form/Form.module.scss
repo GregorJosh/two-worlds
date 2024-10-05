@@ -1,5 +1,14 @@
 @use "/src/styles/vars.scss";
 
+.loader-container {
+  display: flex;
+  justify-content: center;
+
+  & .loader svg {
+    fill: vars.$secondaryLightColor;
+  }
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -14,7 +23,7 @@
   align-items: stretch;
   text-align: left;
 
-  .input {
+  & .input {
     background-color: vars.$secondaryLightColor;
     border: none;
     padding: 10px;
