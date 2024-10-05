@@ -1,14 +1,15 @@
 "use client";
 
-import { useContext } from "react";
 import Link from "next/link";
 
-import { Container, IsAuthContext } from "..";
+import { useAuth } from "@/context";
+
+import { Container } from "..";
 
 import styles from "./Footer.module.scss";
 
-export const Footer = (props: PropsWithClassName) => {
-  const isAuth = useContext(IsAuthContext);
+export const Footer = (props: PropsWithClassName): React.JSX.Element => {
+  const isAuth = useAuth();
 
   return (
     <footer className={`${styles.footer} ${props.className}`}>
