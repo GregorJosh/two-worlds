@@ -9,7 +9,7 @@ export const MenuItem = (props: Props) => {
 
   return (
     <li>
-      <Link {...linkProps} prefetch={false}>
+      <Link {...linkProps} replace={false} prefetch={false} scroll={false}>
         {children}
       </Link>
     </li>
