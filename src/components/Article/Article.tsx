@@ -10,8 +10,8 @@ interface Props extends PropsWithChildren {
 }
 
 export const Article = async (props: Props) => {
-  const article = await getArticle(props.name);
-  const isAuth = getIsAuth();
+  const article: Documents.Article = await getArticle(props.name);
+  const isAuth: boolean = getIsAuth();
 
   const contentHTML = {
     __html: article.content,
