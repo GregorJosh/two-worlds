@@ -1,6 +1,7 @@
 .card {
   display: flex;
   flex-direction: column;
+  gap: 10px;
   padding: 20px;
   text-align: left;
   width: 100%;
@@ -8,4 +9,10 @@
   border-radius: 8px;
   background-color: rgba(0, 0, 0, 0.644);
   backdrop-filter: blur(4px);
+
+  & .content {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
 }
