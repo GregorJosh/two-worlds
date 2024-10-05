@@ -1,15 +1,19 @@
 "use client";
 
+import { MouseEventHandler, useRef } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
-import { MouseEventHandler, useRef } from "react";
 import Editor from "ckeditor5/ckeditor";
 
 import { updateArticle, addImage } from "@/actions";
 
 import { Button } from "..";
 
-export const ArticleEditor = ({ article }: { article: ArticleDocument }) => {
+export const ArticleEditor = ({
+  article,
+}: {
+  article: Documents.Article;
+}): React.JSX.Element => {
   const RichTextEditor = dynamic(
     () => import("../RichTextEditor/RichTextEditor"),
     { ssr: false }
@@ -26,7 +30,6 @@ export const ArticleEditor = ({ article }: { article: ArticleDocument }) => {
   const onImageUpload = async (image: File) => {
     const formData = new FormData();
     formData.set("image", image);
-    debugger;
 
     const imageURL = await addImage(formData, name);
 
