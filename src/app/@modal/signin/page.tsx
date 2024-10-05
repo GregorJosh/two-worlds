@@ -10,31 +10,26 @@ import styles from "./page.module.scss";
 export default function SigninModal() {
   const router = useRouter();
 
-  const onClose = () => {
-    router.back();
-  };
-
-  const onSignIn: ActionHandler = async (formData) => {
+  const submit: ActionHandler = async (formData) => {
     const result = await signIn(formData);
 
-    if (result.status === "success") {
-      router.back();
-      router.back();
-      router.refresh();
-
-      return;
+    if (result.status === "error") {
+      return result;
     }
 
-    return result;
+    router.push("/", { scroll: false });
+    router.refresh();
   };
+
+  console.log("Rendering modal sign-in page...");
 
   return (
     <Backdrop>
-      <Window title="Login" onClose={onClose}>
+      <Window title="Login">
         <Form
           className={styles.form}
           buttonClassName={styles["submit-btn"]}
-          action={onSignIn}
+          action={submit}
         >
           <FormField label="Username:">
             <input
