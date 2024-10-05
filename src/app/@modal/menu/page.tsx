@@ -1,30 +1,34 @@
 "use client";
 
-import { useContext } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
+import { useAuth } from "@/context";
 import { signOut } from "@/actions";
-import { Backdrop, Menu, Footer, IsAuthContext, MenuItem } from "@/components";
+import { Backdrop, Menu, Footer, MenuItem } from "@/components";
 
 import styles from "./page.module.scss";
+import { EventHandler, MouseEventHandler } from "react";
 
-export default function MenuModal() {
-  const isAuth = useContext(IsAuthContext);
+export default function MenuModal(): React.JSX.Element | null {
   const router = useRouter();
-  const pathname = usePathname();
+  const isAuth: boolean = useAuth();
+  const pathname: string = usePathname();
 
-  const onClose = () => {
+  const close: Fun = () => {
     router.back();
   };
 
-  const onSignOut = () => {
+  const onSignOut: MouseEventHandler = (event) => {
+    event.preventDefault();
     signOut();
-    router.back();
+    router.push("/", { scroll: false });
   };
 
   if (pathname !== "/menu") {
     return null;
   }
+
+  console.log("Rendering modal menu page...");
 
   return (
     <Backdrop containerClassName={styles.container}>
@@ -38,7 +42,7 @@ export default function MenuModal() {
           </MenuItem>
         )}
       </Menu>
-      <button className={styles.button} onClick={onClose} type="button">
+      <button className={styles.button} onClick={close} type="button">
         &#9587;
       </button>
       <Footer />
