@@ -42,6 +42,7 @@ export default function RootLayout({
         <AuthProvider isAuth={getIsAuth()}>
           <PlayerProvider>
             <Header className={styles.header} />
+            {player}
             <Container className={styles.container}>
               <SolarSystem />
               {children}
@@ -49,7 +50,6 @@ export default function RootLayout({
             <Footer className={styles.footer} />
             <MenuButton />
             {modal}
-            {player}
           </PlayerProvider>
         </AuthProvider>
       </body>
