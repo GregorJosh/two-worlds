@@ -5,10 +5,10 @@ import ReactPlayer from "react-player";
 import { usePlayer } from "@/context/PlayerContext";
 
 import styles from "./page.module.scss";
-import { Container } from "@/components";
+import { Button, Container } from "@/components";
 
 export default function PlayerPage() {
-  const { url } = usePlayer();
+  const { url, setURL } = usePlayer();
 
   console.log(`Rendering player page with url: ${url}...`);
 
@@ -16,6 +16,9 @@ export default function PlayerPage() {
     return (
       <Container className={styles.container}>
         <ReactPlayer className={styles.player} url={url} controls />
+        <Button className={styles["close-btn"]} onClick={() => setURL(null)}>
+          &#9587;
+        </Button>
       </Container>
     );
   }
