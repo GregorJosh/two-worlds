@@ -5,6 +5,7 @@ import ReactPlayer from "react-player";
 import { usePlayer } from "@/context/PlayerContext";
 
 import styles from "./page.module.scss";
+import { Container } from "@/components";
 
 export default function PlayerPage() {
   const { url } = usePlayer();
@@ -12,7 +13,11 @@ export default function PlayerPage() {
   console.log(`Rendering player page with url: ${url}...`);
 
   if (url) {
-    return <ReactPlayer className={styles.player} url={url} controls />;
+    return (
+      <Container className={styles.container}>
+        <ReactPlayer className={styles.player} url={url} controls />
+      </Container>
+    );
   }
 
   return null;
