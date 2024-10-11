@@ -21,7 +21,7 @@ export const MessageBox = ({
         clearTimeout(timer);
       };
     }
-  }, [message]);
+  }, [message, duration]);
 
   return <>{isVisible ? <p>{message}</p> : null}</>;
 };
